@@ -1,0 +1,2 @@
+curl -X POST localhost:8080/employees -H 'Content-type:application/json' -d \
+'{ "type": "url_verification", "token": "8SpiHvyYuYv9VQri032meL6t", "challenge": "FIs6pgvjvQb5IXKOSfRWdtaLhfTDUiwks2I31wvDAoCuJ2VmTUj9"}'
