@@ -1,0 +1,1 @@
+curl -X POST https://orangelights.lundeberg.tech/challenges -H 'Content-type:application/json' -d '{ "type": "url_verification", "token": "8SpiHvyYuYv9VQri032meL6t", "challenge": "FIs6pgvjvQb5IXKOSfRWdtaLhfTDUiwks2I31wvDAoCuJ2VmTUj9"}'

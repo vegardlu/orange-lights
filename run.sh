@@ -1,0 +1,1 @@
+docker run -it -p 7001:7001 vegardlu/orange-lights:latest
