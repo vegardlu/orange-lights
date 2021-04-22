@@ -1,6 +1,6 @@
 package lundeberg.tech.orange.lights
 
-import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.Fuel.post
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.PostMapping
@@ -14,11 +14,21 @@ class MessageController {
     @PostMapping("/messages")
     fun newMessage(@RequestBody message: Message): Message {
         log.info("Request: $message")
-        Fuel.post("https://homeassistant.lundeberg.tech/api/webhook/orange")
+        post("https://homeassistant.lundeberg.tech/api/webhook/orange")
             .response { result ->
                 log.info("result: $result")
             }
         return message
+    }
+
+    @PostMapping("slash")
+    fun slashCommand(@RequestBody message: String): Response {
+        log.info("Request: $message")
+        post("https://homeassistant.lundeberg.tech/api/webhook/orange")
+            .response { result ->
+                log.info("result: $result")
+            }
+        return Response()
     }
 }
 
@@ -34,4 +44,9 @@ data class Event(
     val user: String,
     val text: String,
     val channel: String
+)
+
+data class Response(
+    val response_type: String = "in_channel",
+    val text: String = "Wakey wakey @Orange"
 )
