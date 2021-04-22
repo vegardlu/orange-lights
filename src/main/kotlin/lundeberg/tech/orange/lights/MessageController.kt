@@ -1,5 +1,6 @@
 package lundeberg.tech.orange.lights
 
+import com.github.kittinunf.fuel.Fuel
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.PostMapping
@@ -13,6 +14,10 @@ class MessageController {
     @PostMapping("/messages")
     fun newMessage(@RequestBody message: Message): Message {
         log.info("Request: $message")
+        Fuel.post("https://homeassistant.lundeberg.tech/api/webhook/orange")
+            .response { result ->
+                log.info("result: $result")
+            }
         return message
     }
 }
@@ -30,16 +35,3 @@ data class Event(
     val text: String,
     val channel: String
 )
-
-
-/**
- *     "event": {
-"type": "message",
-"channel": "G024BE91L",
-"user": "U2147483697",
-"text": "One cannot programmatically detect the difference between `message.mpim` and `message.groups`.",
-"ts": "1355517523.000005",
-"event_ts": "1355517523.000005",
-"channel_type": "group"
-},
- */
